@@ -5,12 +5,14 @@ class Notes extends Component {
   render() {
     return (
       <div>
-        <h3>{this.props.name}</h3>
-        <p>{this.props.modified}</p>
-        <button>Delete Note</button>
-      </div>
-      <div>
-        <p>{this.props.content}</p>
+        <div>
+          <h3 onClick={this.props.select} id={this.props.id}>{this.props.name}</h3>
+          <p>{this.props.modified}</p>
+          <button>Delete Note</button>
+        </div>
+        <div>
+          <p>{this.props.content}</p>
+        </div>
       </div>
     )
   }

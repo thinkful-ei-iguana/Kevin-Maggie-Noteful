@@ -32,6 +32,7 @@ class App extends Component {
       <NoteList 
         store={this.props.store}
         select={this.updateNoteSelected}
+        folder={this.state.folderSelected}
       />
       <Nav 
         store={this.props.store}
