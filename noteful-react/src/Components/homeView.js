@@ -4,23 +4,23 @@ import Nav from './nav';
 import NoteList from './noteList';
 
 class HomeView extends Component{
-    render() {
-
-        return(
-            <div>
-                <Header />
-                <Nav 
-                    store={this.props.store}
-                    select={this.updateFolderSelected}
-                    />
-                <NoteList 
-                    store={this.props.store}
-                    select={this.props.updateNoteSelected}
-                    folder={this.props.folderSelected}
-                    />
-            </div>
-        )
-    }
+  render() {
+    console.log('folder is', this.props.folder);
+    return(
+      <div>
+        <Header />
+        <Nav 
+          store={this.props.store}
+          select={this.updateFolderSelected}
+          />
+        <NoteList 
+          store={this.props.store}
+          select={this.props.updateNoteSelected}
+          folder={this.props.folderSelected}
+          />
+      </div>
+    )
+  }
 }
 
 export default HomeView;

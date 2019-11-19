@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Folders extends Component {
 
   render() {
     return (
       <div>
-        <button 
-          className="folder-button" 
-          id={this.props.id}
-          onClick={this.props.select}
-        >{this.props.folderName}</button>
+        <Link to={`/Folder/${this.props.id}`}>
+            {this.props.folderName}</Link>
       </div>
     )
   }

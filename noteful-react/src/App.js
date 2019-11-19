@@ -11,7 +11,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      folderSelected: null,
+      folderSelected: 'b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1',
       noteSelected: null
     }
   }
@@ -19,6 +19,7 @@ class App extends Component {
   updateFolderSelected = (e) => {
     const folderSelected = e.currentTarget.id;
     this.setState({folderSelected: folderSelected})
+    console.log('folder selected is', folderSelected);
   }
 
   updateNoteSelected = (e) => {
@@ -39,8 +40,9 @@ class App extends Component {
     
     return (
       <div className="App">
+        <Switch>
           <Route
-            path='/'
+            exact path='/'
             render={() => <HomeView
               header={this.header}
               store={this.props.store}
@@ -48,6 +50,16 @@ class App extends Component {
               folder={this.state.folderSelected}
             />}
           />
+          <Route
+            path='/Folder/:folderid'
+            render={() => <FolderView
+              header={this.header}
+              store={this.props.store}
+              select={this.updateNoteSelected}
+              folder={this.state.folderSelected}
+            />}
+          />
+        </Switch>  
       </div>
     );
   }
