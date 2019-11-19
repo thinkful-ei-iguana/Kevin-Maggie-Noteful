@@ -4,7 +4,14 @@ class Notes extends Component {
 
   render() {
     return (
-      null
+      <div>
+        <h3>{this.props.name}</h3>
+        <p>{this.props.modified}</p>
+        <button>Delete Note</button>
+      </div>
+      <div>
+        <p>{this.props.content}</p>
+      </div>
     )
   }
 }

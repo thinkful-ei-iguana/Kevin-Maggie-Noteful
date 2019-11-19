@@ -15,13 +15,28 @@ class App extends Component {
     }
   }
 
+  updateFolderSelected = (e) => {
+    const folderSelected = e.currentTarget.id;
+    this.setState({folderSelected: folderSelected})
+  }
+
+  updateNoteSelected = (e) => {
+    const noteSelected = e.currentTarget.id;
+    this.setState({noteSelected: noteSelected})
+  }
 
   render() {
     return (
       <div className="App">
       <Header />
-      <NoteList />
-      <Nav store={this.props.store} />
+      <NoteList 
+        store={this.props.store}
+        select={this.updateNoteSelected}
+      />
+      <Nav 
+        store={this.props.store}
+        select={this.updateFolderSelected}
+      />
       </div>
     );
   }
