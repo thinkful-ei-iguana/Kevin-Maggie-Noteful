@@ -13,6 +13,7 @@ class Nav extends Component {
         const folderName = folder.name;
         return (
         <Folders 
+          header={this.props.header}
           key={id} 
           id={id} 
           folderName={folderName} 

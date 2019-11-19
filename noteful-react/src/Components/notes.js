@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './notes.css';
 
 class Notes extends Component {
 
@@ -10,7 +11,7 @@ class Notes extends Component {
           <p>{this.props.modified}</p>
           <button>Delete Note</button>
         </div>
-        <div>
+        <div className="hidden">
           <p>{this.props.content}</p>
         </div>
       </div>

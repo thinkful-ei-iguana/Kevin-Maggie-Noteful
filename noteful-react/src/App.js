@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './Components/header';
-import NoteList from './Components/noteList';
-import Nav from './Components/nav';
+import { Route, Switch } from 'react-router-dom';
+import FolderView from './Components/folderView';
+import NotesView from './Components/notesView';
+import HomeView from './Components/homeView';
 
 
 class App extends Component {
@@ -25,19 +26,28 @@ class App extends Component {
     this.setState({noteSelected: noteSelected})
   }
 
+  header = () => {
+    return(
+        <div>
+            <h1>Noteful</h1>
+        </div>
+    )
+  }
+
+  // <Route (exact) path='/' component={HomePage} />
   render() {
+    
     return (
       <div className="App">
-      <Header />
-      <NoteList 
-        store={this.props.store}
-        select={this.updateNoteSelected}
-        folder={this.state.folderSelected}
-      />
-      <Nav 
-        store={this.props.store}
-        select={this.updateFolderSelected}
-      />
+          <Route
+            path='/'
+            render={() => <HomeView
+              header={this.header}
+              store={this.props.store}
+              select={this.updateNoteSelected}
+              folder={this.state.folderSelected}
+            />}
+          />
       </div>
     );
   }
