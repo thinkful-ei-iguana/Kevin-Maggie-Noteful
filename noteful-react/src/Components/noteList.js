@@ -1,23 +1,19 @@
 import React, { Component } from 'react';
-import Note from './notes';
+import Note from './note';
 import store from '../dummyStore';
 
 class NoteList extends Component {
 
     render() {
         
-        const notes = store.notes
-            notes.filter(note => {
-                if(note.folderId === this.props.folderSelected) {
+        return(
+            store.notes.filter(note => {
+                if(!this.props.folderId){
                     return true;
                 }
+                return note.folderId === this.props.folderId;
             })
             .map(note => {
-                return <Note id={note.id} />;
-            });
-
-        return(
-            notes.map(note => {
                 const id = note.id;
                 const name = note.name;
                 const modified = note.modified;
@@ -32,9 +28,8 @@ class NoteList extends Component {
                         modified={modified}
                         folderId={folderId}
                         content={content}
-                        noteSelected={this.props.noteSelected}
-                        allNotes={this.notes}
                         folderSelected={this.props.folderSelected}
+                        descriptionShowing={false}
                     />
                 )
             })

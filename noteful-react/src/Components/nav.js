@@ -18,23 +18,7 @@ class Nav extends Component {
           <div>
             <ul>
             <li key={id} className="each-folder">
-              <Link to={`/Folder/${id}`} 
-                onClick={(e) => {
-                  e.preventDefault();
-                  for (let i = 0; i < store.notes.length; i++) {
-                    const noteFolderId = store.notes[i].folderId;
-                    const element = document.getElementById('li'+store.notes[i].id);
-                    if(id !== noteFolderId){
-                      element.classList.add("hidden");
-                      
-                    } else {
-                      element.classList.remove("hidden");
-                    }
-                  }
-                
-                  
-                }}
-                >
+              <Link to={`/Folder/${id}`}>
                 {folderName}</Link>
             </li>
             </ul>
