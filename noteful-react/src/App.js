@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch } from 'react-router-dom';
-import FolderView from './Components/folderView';
-import NotesView from './Components/notesView';
-import HomeView from './Components/homeView';
+import { Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import Header from './Components/header';
+import Nav from './Components/nav';
+import NoteList from './Components/noteList';
+import Note from './Components/notes';
 
 
 class App extends Component {
@@ -11,7 +13,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      folderSelected: 'b07161a6-ffaf-11e8-8eb2-f2801f1b9fd1',
+      folderSelected: null,
       noteSelected: null
     }
   }
@@ -19,7 +21,6 @@ class App extends Component {
   updateFolderSelected = (e) => {
     const folderSelected = e.currentTarget.id;
     this.setState({folderSelected: folderSelected})
-    console.log('folder selected is', folderSelected);
   }
 
   updateNoteSelected = (e) => {
@@ -35,34 +36,77 @@ class App extends Component {
     )
   }
 
-  // <Route (exact) path='/' component={HomePage} />
   render() {
     
     return (
       <div className="App">
-        <Switch>
-          <Route
-            exact path='/'
-            render={() => <HomeView
-              header={this.header}
-              store={this.props.store}
-              select={this.updateNoteSelected}
-              folder={this.state.folderSelected}
-            />}
-          />
-          <Route
-            path='/Folder/:folderid'
-            render={() => <FolderView
-              header={this.header}
-              store={this.props.store}
-              select={this.updateNoteSelected}
-              folder={this.state.folderSelected}
-            />}
-          />
-        </Switch>  
+        <header>
+          <Header />
+        </header>
+          <div className="body-container">
+            <div className="nav-container">
+              <nav className="folder-menu">
+                <Nav />
+                <Link to={'/Folder/AddNote'}>
+                  Add folder
+                </Link>
+              </nav>
+            </div>
+            <div className="note-container">
+              <Route path='/folder/:folderid' 
+                render={() => <NoteList
+                  header={this.header}
+                  store={this.props.store}
+                  select={this.updateNoteSelected}
+                  folder={this.state.folderSelected}
+                  />}
+                />
+              <Route path='/notes/:noteid' 
+                render={() => <Note
+                  header={this.header}
+                  store={this.props.store}
+                  select={this.updateNoteSelected}
+                  folder={this.state.folderSelected} 
+                  />}
+                />
+              <NoteList />
+            </div>
+            
+          </div>
       </div>
     );
   }
 }
 
 export default App;
+
+
+{/* <Route
+              path='/folder/:folderid'
+              component={FolderView}
+              render={() => <FolderView
+                header={this.header}
+                store={this.props.store}
+                select={this.updateNoteSelected}
+                folder={this.state.folderSelected}
+              />}
+            />
+            <Route
+              path='/notes/:noteid'
+              component={NotesView}
+              render={() => <NotesView
+                header={this.header}
+                store={this.props.store}
+                select={this.updateNoteSelected}
+                folder={this.state.folderSelected}
+              />}
+            />
+            <Route
+              exact path='/'
+              render={() => <HomeView
+                header={this.header}
+                store={this.props.store}
+                select={this.updateNoteSelected}
+                folder={this.state.folderSelected}
+              />}
+            /> */}

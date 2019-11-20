@@ -1,24 +1,27 @@
 import React, { Component } from 'react';
-import Folders from './folders';
+import { Link } from 'react-router-dom';
+import store from '../dummyStore';
 
 class Nav extends Component {
   
   render() {
     
-    const folders = this.props.store.folders
-    
+    const folders = store.folders;
+
     return (
       folders.map(folder => {
         const id = folder.id;
         const folderName = folder.name;
+        console.log('id is', id);
         return (
-        <Folders 
-          header={this.props.header}
-          key={id} 
-          id={id} 
-          folderName={folderName} 
-          select={this.props.select}
-        />
+          <div>
+            <ul>
+            <li key={id} className="each-folder">
+              <Link to={`/Folder/${id}`}>
+                {folderName}</Link>
+            </li>
+            </ul>
+          </div>
         )
       })
     )

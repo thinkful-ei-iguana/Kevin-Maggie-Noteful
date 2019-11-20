@@ -1,39 +1,42 @@
 import React, { Component } from 'react';
 import './notes.css';
+import { Link } from 'react-router-dom';
 
-class Notes extends Component {
+class Note extends Component {
+
+
+  constructor(props) {
+    super(props);
+  
+    this.state = {
+      showing: false
+    }
+  }
 
   render() {
-        console.log('this.props.allNotes.folderid is', this.props.allNotes.folderid);
-        console.log('this.props.folder is', this.props.folder);
+   
 
-        return(null);
-    // return (
-    //   this.props.allNotes.forEach(note => {
-
-
-    //     if(note.folderid === this.props.folder) {
-    //       return (
-    //         <div>
-    //           <div>
-    //             <h3 onClick={this.props.select} id={this.props.id}>{this.props.name}</h3>
-    //             <p>{this.props.modified}</p>
-    //             <button>Delete Note</button>
-    //           </div>
-    //           <div className="hidden">
-    //             <p>{this.props.content}</p>
-    //           </div>
-    //         </div>
-    //       )
-    //   }
-    //     else {
-    //       return(<p> no matches </p>)
-    //     }
-    // })
-
-    //     )
+  return (
+    <ul>
+      <li key={this.props.id} className="each-note">
+        <Link  
+          onClick={() => { 
+            const element = document.getElementById(this.props.id);
+            if(!this.state.showing) {
+              element.classList.remove("hidden");
+              this.setState({showing: true});
+            }
+            else {
+              element.classList.add("hidden");
+              this.setState({showing: false});
+            }
+        }}>{this.props.name}</Link>
+        <p>Last modified: {this.props.modified}</p>
+        <p className="hidden" id={this.props.id}>{this.props.content}</p>
+        <button className="delete-note">Delete</button>
+      </li>
+    </ul>
+  )
   }
 }
-
-
-export default Notes;
+export default Note;
