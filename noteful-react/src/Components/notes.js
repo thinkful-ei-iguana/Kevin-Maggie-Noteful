@@ -18,10 +18,11 @@ class Note extends Component {
 
   return (
     <ul>
-      <li key={this.props.id} className="each-note">
+      <li key={this.props.id} id={'li'+this.props.id} className="each-note">
         <Link  
-          onClick={() => { 
-            const element = document.getElementById(this.props.id);
+          onClick={(e) => { 
+            e.preventDefault();
+            const element = document.getElementById('content'+this.props.id);
             if(!this.state.showing) {
               element.classList.remove("hidden");
               this.setState({showing: true});
@@ -32,7 +33,7 @@ class Note extends Component {
             }
         }}>{this.props.name}</Link>
         <p>Last modified: {this.props.modified}</p>
-        <p className="hidden" id={this.props.id}>{this.props.content}</p>
+        <p className="hidden" id={'content'+this.props.id}>{this.props.content}</p>
         <button className="delete-note">Delete</button>
       </li>
     </ul>
